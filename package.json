@@ -4,7 +4,8 @@
   "description": "This is my package for JavaScript230",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint **/*.js",
+    "test": "mocha test/**"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,14 @@
   "author": "Chelsea Jansen",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
   }
 }

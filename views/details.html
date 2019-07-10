@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <h2>Details for {{name}}</h2>
+        {{#if result}}
+            <li>Animal Type: {{ result.animal }}</li>
+            <li>Name: {{ result.name }}</li>
+            <li>Age: {{ result.age }}</li>
+        {{else}}
+            not found
+        {{/if}}
+    </body>
+</html>
