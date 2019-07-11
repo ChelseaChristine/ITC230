@@ -12,10 +12,9 @@ let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html', defaultLayout: false}));
 app.set("view engine", ".html");
 
-// send static file as response
+// dyanmic response with the home page showing all the animals in the list
 app.get('/', (req, res) => {
-  res.type('text/html');
-  res.sendFile(__dirname + '/public/home.html'); 
+  res.render('home', {animals: animal.getAll()});
  });
 
  // send plain text response
@@ -23,6 +22,7 @@ app.get('/about', (req, res) => {
   res.type('text/plain');
   res.send('this application is for utilizing in my ITC230 class');
  });
+
 //gets an animal name query, then either returns with not found or the results
  app.get('/detail', (req, res) => {
   res.type('text/plain');
@@ -31,6 +31,7 @@ app.get('/about', (req, res) => {
   let result = (found) ? JSON.stringify(found) : JSON.stringify(req.query.name) + "Not found";
   res.send('Searching for ' + JSON.stringify(req.query.name) + "\n" + result);
 });
+//runs utilizing a submission form and opens a specific details page
 app.post('/detail', (req, res) => {
   console.log(req.body); // display parsed form submission
   let found2 = animal.getItem(req.body.name);
@@ -39,10 +40,8 @@ app.post('/detail', (req, res) => {
 
 //gets an animal name query, and will remove it if it exists
 app.get('/delete', (req, res) => {
-  res.type('text/plain');
   let remove = animal.deleteItem(req.query.name);
-  let confirm = (remove) ? req.query.name + " Not Removed" : req.query.name + " Removed";
-  res.send(confirm);
+  res.render('delete', {name: req.query.name, result: remove });
  });
 
  // define 404 handler

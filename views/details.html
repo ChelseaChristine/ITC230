@@ -1,12 +1,15 @@
 <html>
     <body>
+        <a href="/">Home</a>
         <h2>Details for {{name}}</h2>
         {{#if result}}
             <li>Animal Type: {{ result.animal }}</li>
             <li>Name: {{ result.name }}</li>
             <li>Age: {{ result.age }}</li>
+            <p>Would you like to delete ?</p>
+            <a href="/delete?name={{result.name}}">Delete</a>
         {{else}}
-            not found
+            Animal not found
         {{/if}}
     </body>
 </html>

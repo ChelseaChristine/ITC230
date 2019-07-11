@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <a href="/">Home</a>
+
+        {{#if result.removed}}
+            <h2> {{ name }} deleted </h2>
+            <p>There is now {{ result.total }} animals left in the list </p>
+        {{else}}
+            <h2> {{ name }} not found </h2>
+        {{/if}}
+    </body>
+</html>
