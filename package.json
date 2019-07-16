@@ -1,31 +1,36 @@
 {
-  "name": "package.json",
+  "name": "package",
   "version": "1.0.0",
-  "description": "This is my package for JavaScript230",
+  "description": "for ITC230",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
     "lint": "eslint **/*.js",
     "test": "mocha test/**"
   },
   "repository": {
     "type": "git",
-    "url": "github.com/ChelseaChristine/ITC230-Examples"
+    "url": "github.com/ChelseaChristine/ITC230"
   },
   "keywords": [
-    "{search",
-    "project}"
+    "{project",
+    "javascript",
+    "school}"
   ],
   "author": "Chelsea Jansen",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.14"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^6.0.1",
     "mocha": "^6.1.4"
   }
 }
