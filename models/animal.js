@@ -14,5 +14,6 @@ const mySchema = mongoose.Schema({
  name: { type: String, required: true },
  age: String
 }, {collection: 'Animals'}); 
+mongoose.set('useFindAndModify', false);
 
 module.exports = mongoose.model('Animal', mySchema);

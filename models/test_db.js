@@ -1,7 +1,6 @@
 var Animal = require("./animal");
 
-//new Animal({animal:"Dog", name: "scruffy", age:"7"});
-
+//counts how many are in the list
 Animal.countDocuments((err, result) => {
     console.log(result);
 
@@ -12,7 +11,8 @@ Animal.find({}, (err,result) => {
         console.log(err)
     }
     else {
-         console.log(result);
+        return result;
+        console.log(result);
     }
 
 });

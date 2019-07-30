@@ -48,8 +48,13 @@ app.post('/detail', (req, res, next) => {
 
 //gets an animal name query, and will remove it if it exists
 app.get('/delete', (req, res, next) => {
-  animal.deleteItem(req.query.name).then((remove) =>{
-    res.render('delete',{name: req.query.name, result: remove});
+  animal.deleteItem(req.query.name).then((remove) =>{ 
+    Animal.count((err, total) => {
+        res.type('text/html');
+        let removed = remove !=0
+        console.log(removed);
+        res.render('delete', {name: req.query.name, deleted: removed, total: total } );    
+    });
   }).catch((err) =>{
     return next(err);
   });

@@ -2,11 +2,12 @@
     <body>
         <a href="/">Home</a>
 
-        {{#if result.removed}}
+        {{#if deleted}}
             <h2> {{ name }} deleted </h2>
-            <p>There is now {{ result.total }} animals left in the list </p>
+            <p>There is now {{ total }} animals left in the list </p>
         {{else}}
             <h2> {{ name }} not found </h2>
+            <p>There is now {{ total }} animals left in the list </p>
         {{/if}}
     </body>
 </html>
