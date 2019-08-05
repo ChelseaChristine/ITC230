@@ -9,7 +9,16 @@
             </p>
     <FORM action="/detail" method="post">
         Enter the name of an animal: <input type= text name="name">
-        <button>Submit</button>
+        <button>Search</button>
+    </FORM>
+
+    <h2>Add an item</h2>
+    <p>Please fill in the information below to add it to the list</p>
+    <FORM action="/api/v1/add/" method="post">
+        Enter the type of animal(Cat,Dog,Mouse, etc): <input type = text name ="animal">
+        Enter the name of the animal: <input type= text name="name">
+        Enter the age of the animal: <input type= text name="age">
+    <button>Submit</button>
     </FORM>
     <h3>Animals</h3>
         {{#each animals}}

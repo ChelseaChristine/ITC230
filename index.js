@@ -1,14 +1,20 @@
 'use strict'
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
+let express = require("express");
+let bodyParser = require("body-parser");
 let Animal = require("./models/animal");
 let animal = require("./lib/animalMethods");
+
+let app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public')); // set location for static files
 app.use(bodyParser.urlencoded({extended: true})); // parse form submissions
+app.use(bodyParser.json());
 
+app.use('/api', require("cors")());
+app.use((err, req, res, next) => {
+  console.log(err)
+})
 let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html', defaultLayout: false}));
 app.set("view engine", ".html");
@@ -59,6 +65,54 @@ app.get('/delete', (req, res, next) => {
     return next(err);
   });
  });
+
+
+
+//API's
+
+app.get('/api/v1/animals', (req, res, next) => {
+  animal.getAll().then((found) =>{
+    res.json(found);
+  }).catch((err) =>{
+    return next(err);
+  });
+});
+
+//runs utilizing a submission form and opens a specific details page
+app.get('/api/v1/animal/:name', (req, res, next) => {
+  animal.getItem(req.params.name).then((found) =>{
+    res.json(found);
+  }).catch((err) =>{
+    return next(err);
+  });
+});
+ 
+
+//gets an animal name query, and will remove it if it exists
+app.get('/api/v1/book/delete/:name', (req, res, next) => {
+  animal.deleteItem(req.params.name).then((remove) =>{ 
+    Animal.count((err, total) => {
+        let removed = remove !=0
+        console.log(removed);
+        res.json({"deleted": total});
+    });
+  }).catch((err) =>{
+    return next(err);
+  });
+ });
+
+ app.post('/api/v1/add/', (req, res, next) => { 
+// insert new document    
+    let newAnimal = {animal: req.body.animal, name: req.body.name, age: req.body.age };
+    let add = animal.addItem(newAnimal);
+      console.log(add);
+      Animal.count((err, total) => {
+          let added = add !=0
+          console.log(total);
+          res.json({"added": total});
+      });
+});
+ 
 
  // define 404 handler
 app.use( (req,res) => {
