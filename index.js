@@ -22,7 +22,7 @@ app.set("view engine", ".html");
 // dyanmic response with the home page showing all the animals in the list
 app.get('/', (req, res, next) => {
   animal.getAll().then((allAnimals) => {
-    res.render('home', {animals: allAnimals }); 
+    res.render('homeReact', {animals: JSON.stringify(allAnimals) }); 
   }).catch((err) =>{
     return next(err);
   });

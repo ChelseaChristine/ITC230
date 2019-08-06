@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+       const Opener = ({title, description}) => {
+      //adds my title and description of me to my page
+      return (<div>
+                <h2>{title}</h2>
+                <p>{description}</p>
+                </div>)
+    }
+
+    //adds the list of animals from my database
+    const List = (props, show) =>{
+        console.log(props)
+        let items_list = props.items.map((item) =>{
+            return <li onClick={props.clickHandler} key={item._id} id={item._id}>{item.name}</li>
+        });
+        return(
+            <div>
+                <h2>List of Animals</h2>
+                <ul>
+                    {items_list}
+                </ul>
+                </div>
+            );
+    }
+
+    //shows the details of the animals from my database using an onclick event
+    const Detail = (props) =>{
+        return (
+            <div>
+                Animal: {props.item.animal}<br/>
+                Name: {props.item.name}<br/>
+                Age: {props.item.age}<br/>
+                </div>
+        )
+    }
+    //pulls the animals from the database for use and sets up an onclick event called showDetails
+    class MyAnimals extends React.Component {
+      constructor(props){
+        super(props);
+        // data from server 
+        this.state = {
+          items: {{{animals}}},
+          curItem: {}
+        };
+        this.showDetails = this.showDetails.bind(this);
+    }
+
+        showDetails(event){
+        let showItem =this.state.items.find((item) =>{
+            return item._id ==event.target.id;
+        });
+        this.setState({curItem: showItem});
+      }
+      
+      //renders what should appear on the page
+      render() {
+        return (
+          <div>
+            <Opener title ="Chelsea Jansens ITC230 Project"/>
+            <Opener description =" My name is Chelsea.  I am a 25 year old programming student who will be graduating in Summer19 at Seattle Central College with a degree in Programming. I plan to get into video game development after graduation, or app software development. I have 2 cats and I am currently engaged."/>
+            <List items={this.state.items} clickHandler={this.showDetails} />
+            <Detail item={this.state.curItem}/>
+          </div>
+        );
+      }
+          
+    }
+    
+    ReactDOM.render(<MyAnimals />, document.getElementById('root'));
+   </script>
+    </body>
+</html>
