@@ -89,29 +89,25 @@ app.get('/api/v1/animal/:name', (req, res, next) => {
  
 
 //gets an animal name query, and will remove it if it exists
-app.get('/api/v1/book/delete/:name', (req, res, next) => {
+app.get('/api/v1/animal/delete/:name', (req, res, next) => {
+  console.log(req.params.name);
   animal.deleteItem(req.params.name).then((remove) =>{ 
-    Animal.count((err, total) => {
-        let removed = remove !=0
-        console.log(removed);
-        res.json({"deleted": total});
-    });
   }).catch((err) =>{
     return next(err);
   });
  });
 
  app.post('/api/v1/add/', (req, res, next) => { 
-// insert new document    
-    let newAnimal = {animal: req.body.animal, name: req.body.name, age: req.body.age };
-    let add = animal.addItem(newAnimal);
-      console.log(add);
-      Animal.count((err, total) => {
-          let added = add !=0
-          console.log(total);
-          res.json({"added": total});
-      });
-});
+  // insert new document    
+      let newAnimal = {animal: req.body.animal, name: req.body.name, age: req.body.age };
+      let add = animal.addItem(newAnimal);
+        console.log(add);
+        Animal.count((err, total) => {
+            let added = add !=0
+            console.log(total);
+            res.json({"added": total});
+        });
+  });
  
 
  // define 404 handler
