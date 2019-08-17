@@ -94,22 +94,22 @@
           body: JSON.stringify(newAnimal)
         }).then(res => res.json())
         	.then((json) => {
-            let newData;
-          if (!newItem._id) { // adds a new item to array
-            newData = this.state.items;
+            let newAnimalSet;
+          if (!newAnimal._id) { // adds a new item to array
+            newAnimalSet = this.state.items;
             newAnimal._id = json._id;
-            newData.push(newAnimal);
+            newAnimalSet.push(newAnimal);
           } else { // update existing items 
-            newData = this.state.items.map((item) => {
-              if (item._id === newItem._id) {
-                item = newItem; 
+            newAnimalSet = this.state.items.map((item) => {
+              if (item._id === newAnimal._id) {
+                item = newAnimal; 
               }
               return item;
             });        
           }
   
           // Update state with new array
-          this.setState({items: newData});
+          this.setState({items: newAnimalSet});
         });
       }
       
